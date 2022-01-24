@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Customer Home!</title>   </h:head>
+<h:body>
+<h2>Hello #{user.name}</h2>
+Welcome to Home page
+
+<h3>
+Product List
+</h3>
+<h4>
+Category : #{productBean.selectedCategory.name}
+</h4>
+<h:form prependId="false">
+	<h:dataTable var="product" value="#{productBean.products}"
+			border="1" cellpadding="2" cellspacing="2">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{product.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{product.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+				#{product.desc}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Price</f:facet>
+				#{product.price}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Option</f:facet>
+				<h:commandLink value="Buy Now" action="#{cartBean.buy(product)}"></h:commandLink>
+			</h:column>
+		</h:dataTable>
+		
+		<h3>Category</h3>
+		<h:dataTable var="category" value="#{categoryBean.categories}"
+			border="1" cellpadding="2" cellspacing="2">
+			<h:column>
+			<f:facet name="header">Id</f:facet>
+				<h:outputText value = "#{category.id}" />
+			</h:column>
+			<h:column>
+			<f:facet name="header">Name</f:facet>
+				<h:commandLink value="#{category.name}" 
+					action="#{productBean.selectCategory(category)}" />
+			</h:column>
+		</h:dataTable>
+	<h:commandButton action="#{productBean.toCart}" value="Cart">
+</h:commandButton>	
+		
+<h:commandButton action="#{cartBean.logout}" value="Logout">
+</h:commandButton>
+
+</h:form>
+</h:body>
+</html>
