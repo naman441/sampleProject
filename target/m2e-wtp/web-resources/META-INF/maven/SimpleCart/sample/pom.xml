@@ -15,6 +15,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.6.2</version>
+</dependency>
+    <dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.11</version>
