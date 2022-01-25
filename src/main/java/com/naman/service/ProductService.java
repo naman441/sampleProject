@@ -57,5 +57,14 @@ public class ProductService {
 	public Product getProductById(int id) {
 		return productDaoImpl.get(id);
 	}
+	
+	public void deleteProduct(int id) {
+		Product p =  productDaoImpl.get(id);
+		productDaoImpl.delete(p);
+	}
+	
+	public void updateProduct(Product product) {
+		productDaoImpl.update(product);
+	}
 
 }

@@ -36,7 +36,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(category);
+		session.delete(category);
 		t.commit();
 		session.close();
 	}

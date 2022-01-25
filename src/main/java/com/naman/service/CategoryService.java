@@ -50,5 +50,14 @@ public class CategoryService {
 	public Category getCategoryById(int id) {
 		return categoryDaoImpl.get(id);
 	}
+	
+	public void deleteCategory(int id) {
+		Category c =  categoryDaoImpl.get(id);
+		categoryDaoImpl.delete(c);
+	}
+	
+	public void updateCategory(Category category) {
+		categoryDaoImpl.update(category);
+	}
 
 }

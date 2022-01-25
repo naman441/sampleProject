@@ -35,7 +35,7 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(product);
+		session.delete(product);
 		t.commit();
 		session.close();
 	}
