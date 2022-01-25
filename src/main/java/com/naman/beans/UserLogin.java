@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.beans;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import org.springframework.web.context.annotation.SessionScope;
 import com.naman.Model.CartItem;
 import com.naman.Model.User;
 import com.naman.dao.UserDao;
+import com.naman.service.CartService;
+import com.naman.service.UserService;
 
 @Component
 @SessionScope

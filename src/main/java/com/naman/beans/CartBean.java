@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import com.naman.Model.CartItem;
 import com.naman.Model.Product;
+import com.naman.service.CartService;
+import com.naman.service.UserService;
 
 @Component
 @SessionScope
@@ -44,7 +46,8 @@ public class CartBean {
 	}
 	
 	public String delete(Product product) {
-		return cartService.removeItemFromCart(items, product);
+		this.items = cartService.removeItemFromCart(items, product);
+		return "cart";
 	}
 	
 	public double total() {

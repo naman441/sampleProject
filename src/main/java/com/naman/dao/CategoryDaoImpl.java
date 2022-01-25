@@ -85,15 +85,9 @@ public class CategoryDaoImpl implements CategoryDao{
 		if(categories == null || categories.isEmpty())
 			return products;
 		else {
-			products = categories.get(0).getProducts();
-			session.close();
+			Category c = categories.get(0);
+			products = c.getProducts();
 			return products;
 		}
-	}
-	
-	public void createCategory() {
-		insert(new Category("Electronics", "Mobiles"));
-		insert(new Category("Grocery", "HouseHold stuff"));
-		insert(new Category("Sports", "Sport items"));
 	}
 }

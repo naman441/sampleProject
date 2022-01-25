@@ -29,7 +29,10 @@ public class Product {
 	private String desc;
 	private double price;
 	
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.DETACH, 
+						   CascadeType.MERGE,
+						   CascadeType.PERSIST,
+						   CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	@JoinTable(
 				name = "Product_Category",
 				joinColumns = {@JoinColumn(name="product_id")},

@@ -46,5 +46,9 @@ public class CategoryService {
 			return categories;
 		else return categoryDaoImpl.getAllCategory();
 	}
+	
+	public Category getCategoryById(int id) {
+		return categoryDaoImpl.get(id);
+	}
 
 }

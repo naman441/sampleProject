@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import com.naman.dao.CategoryDao;
 import com.naman.dao.CategoryDaoImpl;
 import com.naman.dao.ProductDao;
 import com.naman.dao.ProductDaoImpl;
+import com.naman.service.ProductService;
 
 @Component
 @RequestScope

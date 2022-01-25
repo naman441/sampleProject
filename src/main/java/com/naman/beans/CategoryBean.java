@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.beans;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import com.naman.Model.Category;
 import com.naman.dao.CategoryDao;
 import com.naman.dao.CategoryDaoImpl;
+import com.naman.service.CategoryService;
 
 @Component
 @RequestScope

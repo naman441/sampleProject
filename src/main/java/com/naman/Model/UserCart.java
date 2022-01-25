@@ -18,7 +18,10 @@ public class UserCart {
 	@Id
 	private int id;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = {CascadeType.DETACH, 
+		   				  CascadeType.MERGE,
+		   				  CascadeType.PERSIST,
+		   				  CascadeType.REFRESH}, fetch = FetchType.EAGER)
 	@JoinColumn(name ="id")
 	@MapsId
 	private User user;

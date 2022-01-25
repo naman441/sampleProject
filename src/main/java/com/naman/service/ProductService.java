@@ -53,5 +53,9 @@ public class ProductService {
 		product.setCategories(list);
 		productDaoImpl.insert(product);
 	}
+	
+	public Product getProductById(int id) {
+		return productDaoImpl.get(id);
+	}
 
 }

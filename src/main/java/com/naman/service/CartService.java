@@ -47,14 +47,14 @@ public class CartService {
 		return items;
 	}
 	
-	public String removeItemFromCart(List<CartItem> items, Product product) {
+	public List<CartItem> removeItemFromCart(List<CartItem> items, Product product) {
 		int index = IntStream.range(0, items.size())
 				.filter(i-> items.get(i).getProduct().getId() == product.getId()).findFirst().getAsInt();
 		if(items.get(index).getQuantity() > 1)
 			items.get(index).setQuantity(items.get(index).getQuantity() - 1);
 		else
 			items.remove(index);
-		return "cart";
+		return items;
 	}
 	
 	public double cartTotal(List<CartItem> items) {
@@ -77,7 +77,6 @@ public class CartService {
 			else {
 				userCartDaoImpl.delete(uCart);
 				userCartDaoImpl.insert(cart);
-				//userCartDaoImpl.update(cart);
 			}
 		}
 		else {

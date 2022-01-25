@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -28,7 +30,11 @@ public class Category {
 	private String name;
 	private String desc;
 	
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(cascade = {CascadeType.DETACH, 
+		   					CascadeType.MERGE,
+		   					CascadeType.PERSIST,
+		   					CascadeType.REFRESH}, fetch = FetchType.LAZY)
 	@JoinTable(
 				name = "Product_Category",
 				joinColumns = {@JoinColumn(name="category_id")},
