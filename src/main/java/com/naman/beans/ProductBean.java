@@ -71,14 +71,6 @@ public class ProductBean {
 		this.categories = categories;
 	}
 
-	public String index() {
-		return "customer";
-	}
-	
-	public String toCart() {
-		return "cart";
-	}
-	
 	public String selectCategory(Category category) {
 		this.products = productService.getProductsByCategory(category.getId());
 		this.selectedCategory = category;

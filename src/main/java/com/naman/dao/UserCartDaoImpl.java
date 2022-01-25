@@ -61,6 +61,14 @@ public class UserCartDaoImpl implements UserCartDao{
 		else return products.get(0);
 	}
 	
-	
+	public void deleteProductFromCart(int id) {
+		Session session = sessionFactory.openSession();
+		Query q = session.createSQLQuery("delete from USERCART_ITEMS where product_id = :id");
+		q.setParameter("id", id);
+		Transaction t = session.beginTransaction();
+		q.executeUpdate();
+		t.commit();
+		session.close();
+	}
 
 }

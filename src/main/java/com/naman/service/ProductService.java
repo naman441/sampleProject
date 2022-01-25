@@ -12,6 +12,7 @@ import com.naman.Model.Category;
 import com.naman.Model.Product;
 import com.naman.dao.CategoryDaoImpl;
 import com.naman.dao.ProductDaoImpl;
+import com.naman.dao.UserCartDaoImpl;
 
 @Service
 public class ProductService {
@@ -21,6 +22,9 @@ public class ProductService {
 	
 	@Autowired
 	CategoryDaoImpl categoryDaoImpl;
+	
+	@Autowired
+	UserCartDaoImpl userCartDaoImpl;
 	
 	public void addProduct(Product product) {
 		productDaoImpl.insert(product);
@@ -60,6 +64,7 @@ public class ProductService {
 	
 	public void deleteProduct(int id) {
 		Product p =  productDaoImpl.get(id);
+		userCartDaoImpl.deleteProductFromCart(p.getId());
 		productDaoImpl.delete(p);
 	}
 	

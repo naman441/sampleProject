@@ -56,7 +56,7 @@ Category : #{productBean.selectedCategory.name}
 					action="#{productBean.selectCategory(category)}" />
 			</h:column>
 		</h:dataTable>
-	<h:commandButton action="#{productBean.toCart}" value="Cart">
+	<h:commandButton action="cart" value="Cart">
 </h:commandButton>	
 		
 <h:commandButton action="#{cartBean.logout}" value="Logout">
