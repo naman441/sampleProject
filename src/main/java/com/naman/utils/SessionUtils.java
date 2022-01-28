@@ -13,9 +13,7 @@ public class SessionUtils {
 	private static HttpSession httpSession;
 
 	public static HttpSession getHttpSession() {
-		FacesContext con = 	FacesContext.getCurrentInstance();
-		ExternalContext con1 = con.getExternalContext();
-		httpSession = (HttpSession) con1.getSession(false);
-		return httpSession;
+		return httpSession = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
 	}
 }

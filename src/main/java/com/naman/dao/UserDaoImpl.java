@@ -2,6 +2,8 @@ package com.naman.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,13 +19,14 @@ public class UserDaoImpl implements UserDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void insert(User user) {
+	public int insert(User user) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(user);
+		User u = (User) session.save(user);
 		t.commit();
 		session.close();
+		return u.getId();
 	}
 
 	@Override

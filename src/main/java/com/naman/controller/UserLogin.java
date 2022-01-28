@@ -1,13 +1,15 @@
-package com.naman.beans;
+package com.naman.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.naman.Model.CartItem;
@@ -16,7 +18,7 @@ import com.naman.dao.UserDao;
 import com.naman.service.CartService;
 import com.naman.service.UserService;
 
-@Component
+@Controller
 @SessionScope
 public class UserLogin {
 	
@@ -28,8 +30,9 @@ public class UserLogin {
 	@Autowired
 	CartService cartService;
 	
-	public UserLogin() {
-		this.user = new User();
+	@PostConstruct
+	public void init() {
+		user = new User();
 	}
 	
 	public User getUser() {

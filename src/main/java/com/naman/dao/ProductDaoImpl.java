@@ -21,13 +21,14 @@ public class ProductDaoImpl implements ProductDao{
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void insert(Product product) {
+	public int insert(Product product) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(product);
+		Product p = (Product) session.save(product);
 		t.commit();
 		session.close();
+		return p.getId();
 	}
 
 	@Override

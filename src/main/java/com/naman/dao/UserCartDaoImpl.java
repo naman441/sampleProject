@@ -19,13 +19,14 @@ public class UserCartDaoImpl implements UserCartDao{
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void insert(UserCart cart) {
+	public int insert(UserCart cart) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(cart);
+		UserCart cart1 = (UserCart) session.save(cart);
 		t.commit();
 		session.close();
+		return cart1.getId();
 	}
 
 	@Override

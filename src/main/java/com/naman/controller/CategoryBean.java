@@ -1,9 +1,12 @@
-package com.naman.beans;
+package com.naman.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -12,7 +15,7 @@ import com.naman.dao.CategoryDao;
 import com.naman.dao.CategoryDaoImpl;
 import com.naman.service.CategoryService;
 
-@Component
+@Controller
 @RequestScope
 public class CategoryBean {
 	
@@ -23,8 +26,9 @@ public class CategoryBean {
 	@Autowired
 	private CategoryService categoryService;
 	
-	public CategoryBean() {
-		category = new Category();
+	@PostConstruct
+	public void init() {
+		categories = categoryService.getAllCategories();
 	}
 	
 	public Category getCategory() {
@@ -36,7 +40,7 @@ public class CategoryBean {
 	}
 
 	public List<Category> getCategories() {
-		return categoryService.getCategoryList(categories);
+		return categories;
 	}
 
 	public void setCategories(List<Category> categories) {

@@ -26,9 +26,16 @@ public class CartService {
 	
 	@Autowired
 	private UserDaoImpl userDaoImpl;
+	
+	public CartService() {
+	}
+	
+	public CartService(UserCartDaoImpl impl) {
+		userCartDaoImpl = impl;
+	}
 
-	public void insertCart(UserCart cart) {
-		userCartDaoImpl.insert(cart);
+	public int insertCart(UserCart cart) {
+		return userCartDaoImpl.insert(cart);
 	}
 	
 	public List<CartItem> addItemToCart(List<CartItem> items, Product product) {
@@ -65,7 +72,9 @@ public class CartService {
 	
 	public void saveCartOnUserLogout(List<CartItem> items) {
 		UserCart cart = new UserCart();
-		String name = (String) SessionUtils.getHttpSession().getAttribute("userName");
+		String name = "";
+		if(SessionUtils.getHttpSession() != null)
+			name = (String) SessionUtils.getHttpSession().getAttribute("userName");
 		User user = userDaoImpl.getUserByName(name);
 		if(user != null)
 			cart.setUser(user);
@@ -85,18 +94,15 @@ public class CartService {
 		}
 	}
 	
-	public List<CartItem> getCartItemsByUser(List<CartItem> items) {
-		if(items == null || items.isEmpty()) {
+	public List<CartItem> getCartItemsByUser() {
+		List<CartItem> items = new ArrayList<CartItem>();
 			String name = (String) SessionUtils.getHttpSession().getAttribute("userName");
 			User user = userDaoImpl.getUserByName(name);
 			if(user != null) {
 				UserCart cart = userCartDaoImpl.get(user.getId());
 				if(cart != null)
 					items = cart.getItems();
-				else 
-					items = new ArrayList<CartItem>();
 			}
-		}
 		return items;
 	}
 	

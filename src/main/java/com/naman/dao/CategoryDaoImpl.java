@@ -22,13 +22,14 @@ public class CategoryDaoImpl implements CategoryDao{
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public void insert(Category category) {
+	public int insert(Category category) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		session.save(category);
+		Category c = (Category) session.save(category);
 		t.commit();
 		session.close();
+		return c.getId();
 	}
 
 	@Override

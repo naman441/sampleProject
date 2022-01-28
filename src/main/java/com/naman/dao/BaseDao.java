@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BaseDao<T> {
 	
-	public void insert(T t);
+	public int insert(T t);
 	
 	public void delete(T t);
 	

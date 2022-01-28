@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//@WebFilter(filterName= "AuthFilter", urlPatterns = {"*.xhtml", "*.jsf"})
+@WebFilter(filterName= "AuthFilter", urlPatterns = {"*.xhtml", "*.jsf"})
 public class AuthorizationFilter implements Filter{
 	
 	public AuthorizationFilter() {
@@ -32,6 +32,10 @@ public class AuthorizationFilter implements Filter{
 		try {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse res = (HttpServletResponse) response;
+			
+			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+			res.setHeader("Pragma", "no-cache");
+			res.setDateHeader("Expires", 0);
 			
 			HttpSession session = req.getSession(false);
 			if(req.getRequestURI().indexOf("/login.xhtml") >= 0 ||

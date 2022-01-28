@@ -34,12 +34,7 @@ public class Category {
 	@ManyToMany(cascade = {CascadeType.DETACH, 
 		   					CascadeType.MERGE,
 		   					CascadeType.PERSIST,
-		   					CascadeType.REFRESH}, fetch = FetchType.EAGER)
-	@JoinTable(
-				name = "Product_Category",
-				joinColumns = {@JoinColumn(name="category_id")},
-				inverseJoinColumns = {@JoinColumn(name="product_id")}
-			)
+		   					CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "categories")
 	private List<Product> products = new ArrayList<Product>();
 	
 	public Category() {

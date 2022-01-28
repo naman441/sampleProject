@@ -53,7 +53,7 @@ public class UserService {
 	
 	public String registerUser(User user) {
 		userDaoImpl.insert(user);
-		return "login?faces-redirect=true";
+		return "login";
 	}
 
 }

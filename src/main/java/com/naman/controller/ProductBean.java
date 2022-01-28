@@ -1,8 +1,9 @@
-package com.naman.beans;
+package com.naman.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
@@ -23,8 +25,8 @@ import com.naman.dao.ProductDao;
 import com.naman.dao.ProductDaoImpl;
 import com.naman.service.ProductService;
 
-@Component
-@RequestScope
+@Controller
+@SessionScope
 public class ProductBean {
 
 	private List<Product> products;
@@ -35,12 +37,13 @@ public class ProductBean {
 	@Autowired
 	private ProductService productService;
 	
-	public ProductBean() {
-		this.product = new Product();
+	@PostConstruct
+	public void init() {
+		//products = new ArrayList<Product>();
 	}
 
 	public List<Product> getProducts() {
-		return  productService.getProductList(products);
+		return products;
 	}
 
 	public void setProducts(List<Product> products) {
@@ -71,14 +74,19 @@ public class ProductBean {
 		this.categories = categories;
 	}
 
-	public String selectCategory(Category category) {
+	public void selectCategory(Category category) {
 		this.products = productService.getProductsByCategory(category.getId());
 		this.selectedCategory = category;
-		return "customer";
 	}
 	
 	public String createProduct() {
 		productService.createProduct(product, categories);
-		return "admin?faces-redirect=true";
+		return "admin";
+	}
+	
+	public boolean hasData() {
+		if(products != null && products.size() > 0)
+			return true;
+		else return false;
 	}
 }

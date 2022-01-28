@@ -1,4 +1,4 @@
-package com.naman.beans;
+package com.naman.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,11 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.naman.Model.CartItem;
@@ -15,7 +18,7 @@ import com.naman.Model.Product;
 import com.naman.service.CartService;
 import com.naman.service.UserService;
 
-@Component
+@Controller
 @SessionScope
 public class CartBean {
 
@@ -27,12 +30,12 @@ public class CartBean {
 	@Autowired
 	private UserService userService;
 	
-	public CartBean() {
-		this.items = new ArrayList<CartItem>();
+	@PostConstruct
+	public void init() {
+		items = cartService.getCartItemsByUser();
 	}
 
 	public List<CartItem> getItems() {
-		this.items = cartService.getCartItemsByUser(items);
 		return items;
 	}
 
@@ -45,9 +48,8 @@ public class CartBean {
 		return "cart";
 	}
 	
-	public String delete(Product product) {
+	public void delete(Product product) {
 		this.items = cartService.removeItemFromCart(items, product);
-		return "cart";
 	}
 	
 	public double total() {

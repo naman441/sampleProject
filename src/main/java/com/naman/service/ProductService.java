@@ -35,9 +35,6 @@ public class ProductService {
 	}
 	
 	public List<Product> getProductList(List<Product> products){
-		if(products != null && !products.isEmpty())
-			return products;
-		else
 			return getAllProducts();
 	}
 	
