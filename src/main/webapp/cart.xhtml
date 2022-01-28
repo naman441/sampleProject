@@ -10,6 +10,8 @@
 
 	<h3>Cart Info</h3>
 	<h:form prependId="false">
+	<h:outputText value="#{userLogin.userMsg}"></h:outputText>
+	
 		<table border="1" cellpadding="2" cellspacing="2">
 			<tr>
 				<th>Option</th>
@@ -27,13 +29,19 @@
 					<td>#{item.product.id}</td>
 					<td>#{item.product.name}</td>
 					<td>#{item.product.price}</td>
-					<td>#{item.quantity}</td>
-					<td>#{item.product.price * item.quantity}</td>
+					<td>
+					<h:inputText id = "quantity" value="#{item.quantity}" size="3" 
+							onChange="#{cartBean.update(item.product, item.quantity)}">
+							<f:ajax event="change" execute="@this" render="total subTotal"/>
+							</h:inputText>
+					</td>
+					<td> <h:outputText id ="subTotal" value= "#{item.product.price * item.quantity}"/>
+					</td>
 				</tr>
 			</ui:repeat>
 			<tr>
 				<td colspan="5" align="right">Total</td>
-				<td>#{cartBean.total()}</td>
+				<td><h:outputText id ="total" value= "#{cartBean.total()}"/>  </td>
 			</tr>
 		</table>
 		<br></br>

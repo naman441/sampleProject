@@ -38,7 +38,7 @@ public class Product {
 				joinColumns = {@JoinColumn(name="product_id")},
 				inverseJoinColumns = {@JoinColumn(name="category_id")}
 			)
-	private List<Category> categories = new ArrayList<Category>();
+	private Set<Category> categories = new HashSet<Category>();
 	
 	public Product() {
 	}
@@ -49,7 +49,7 @@ public class Product {
 		this.price = price;
 	}
 	
-	public Product(String name, String desc, double price, List<Category> categories) {
+	public Product(String name, String desc, double price, Set<Category> categories) {
 		this.name = name;
 		this.desc = desc;
 		this.price = price;
@@ -88,11 +88,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<Category> categories) {
+	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
 }

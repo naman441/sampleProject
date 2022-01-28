@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.naman.Model.Category;
 import com.naman.Model.Product;
 
+@Transactional
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
 
@@ -26,10 +29,10 @@ public class CategoryDaoImpl implements CategoryDao{
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		Category c = (Category) session.save(category);
+		int id = (int) session.save(category);
 		t.commit();
 		session.close();
-		return c.getId();
+		return id;
 	}
 
 	@Override
@@ -87,7 +90,7 @@ public class CategoryDaoImpl implements CategoryDao{
 			return products;
 		else {
 			Category c = categories.get(0);
-			products = c.getProducts();
+			products.addAll(c.getProducts());
 			return products;
 		}
 	}

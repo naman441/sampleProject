@@ -28,6 +28,9 @@ public class CartBean {
 	private CartService cartService;
 	
 	@Autowired
+	private UserLogin userLogin;
+	
+	@Autowired
 	private UserService userService;
 	
 	@PostConstruct
@@ -45,11 +48,13 @@ public class CartBean {
 	
 	public String buy(Product product) {
 		this.items = cartService.addItemToCart(items, product);
+		userLogin.setUserMsg("Product added to cart: " + product.getName());
 		return "cart";
 	}
 	
 	public void delete(Product product) {
 		this.items = cartService.removeItemFromCart(items, product);
+		userLogin.setUserMsg("Product removed from cart :" + product.getName());
 	}
 	
 	public double total() {
@@ -59,6 +64,10 @@ public class CartBean {
 	public String logout() {
 		cartService.saveCartOnUserLogout(items);
 		return userService.userLogout();
+	}
+	
+	public void update(Product product, double quantity) {
+		this.items = cartService.updateItemQuantity(items, product, quantity);
 	}
 	
 }

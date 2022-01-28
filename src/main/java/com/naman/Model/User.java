@@ -29,6 +29,13 @@ public class User {
 		this.role = role;
 	}
 	
+	public User(String name, String password, String role, String timeStamp) {
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.timeStamp = timeStamp;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", unique = true, nullable = false)
@@ -42,6 +49,8 @@ public class User {
 	
 	@Column(name="role", nullable = false)
 	private String role;
+	
+	private String timeStamp;
 	
 	public int getId() {
 		return id;
@@ -73,6 +82,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(String timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.naman.Model.User;
 
+@Transactional
 @Repository
 public class UserDaoImpl implements UserDao {
 	
@@ -23,10 +24,10 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
-		User u = (User) session.save(user);
+		int id = (int) session.save(user);
 		t.commit();
 		session.close();
-		return u.getId();
+		return id;
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import com.naman.service.UserService;
 @SessionScope
 public class UserLogin {
 	
+	private String userMsg;
 	private User user;
 	
 	@Autowired
@@ -33,8 +34,17 @@ public class UserLogin {
 	@PostConstruct
 	public void init() {
 		user = new User();
+		userMsg = "";
 	}
 	
+	public String getUserMsg() {
+		return userMsg;
+	}
+
+	public void setUserMsg(String userMsg) {
+		this.userMsg = userMsg;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -44,7 +54,9 @@ public class UserLogin {
 	}
 	
 	public String validateUser() {
-		return service.validateUser(user);
+		String result = service.validateUser(user);
+		setUser(service.getDbUser(user.getName()));
+		return result;
 	}
 	
 	public String userLogout() {

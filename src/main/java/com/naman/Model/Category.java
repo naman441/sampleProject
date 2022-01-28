@@ -35,7 +35,7 @@ public class Category {
 		   					CascadeType.MERGE,
 		   					CascadeType.PERSIST,
 		   					CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "categories")
-	private List<Product> products = new ArrayList<Product>();
+	private Set<Product> products = new HashSet<Product>();
 	
 	public Category() {
 	}
@@ -64,11 +64,11 @@ public class Category {
 		this.desc = desc;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 

@@ -1,7 +1,9 @@
 package com.naman.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -43,7 +45,7 @@ public class ProductService {
 	}
 	
 	public void createProduct(Product product, List<String> categories) {
-		List<Category> list = new ArrayList<Category>();
+		Set<Category> list = new HashSet<Category>();
 		if(categories != null && !categories.isEmpty()) {
 			for(String n : categories) {
 				int id = Integer.parseInt(n);

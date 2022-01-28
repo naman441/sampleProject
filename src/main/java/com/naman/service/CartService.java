@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,13 @@ public class CartService {
 		return items;
 	}
 	
+	public List<CartItem> updateItemQuantity(List<CartItem> items, Product product, double quantity) {
+		int index = IntStream.range(0, items.size())
+				.filter(i-> items.get(i).getProduct().getId() == product.getId()).findFirst().getAsInt();
+		items.get(index).setQuantity(quantity);
+		return items;
+	}
+	
 	public double cartTotal(List<CartItem> items) {
 		double sum = 0;
 		sum = items.stream().collect(Collectors.summingDouble(p-> p.getProduct().getPrice()*p.getQuantity()));
@@ -84,8 +92,7 @@ public class CartService {
 			if(uCart == null)
 				userCartDaoImpl.insert(cart);
 			else {
-				userCartDaoImpl.delete(uCart);
-				userCartDaoImpl.insert(cart);
+				userCartDaoImpl.updateUserCart(uCart, cart);
 			}
 		}
 		else {

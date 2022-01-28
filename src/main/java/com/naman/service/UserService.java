@@ -1,5 +1,8 @@
 package com.naman.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.naman.Model.User;
 import com.naman.dao.UserDaoImpl;
+import com.naman.utils.AppUtils;
 import com.naman.utils.SessionUtils;
 
 @Service
@@ -17,9 +21,6 @@ public class UserService {
 	
 	@Autowired
 	private UserDaoImpl userDaoImpl;
-	
-	@Autowired
-	private CartService cartService;
 	
 	public String validateUser(User user) {
 		User userDb = userDaoImpl.getUserByName(user.getName());
@@ -29,6 +30,8 @@ public class UserService {
 		}
 		else if(userMatch(userDb, user)) {
 			SessionUtils.getHttpSession().setAttribute("userName", user.getName());
+			userDb.setTimeStamp(AppUtils.formatDate(LocalDateTime.now()));
+			userDaoImpl.update(userDb);
 			return userDb.getRole();
 		}
 		else {
@@ -54,6 +57,10 @@ public class UserService {
 	public String registerUser(User user) {
 		userDaoImpl.insert(user);
 		return "login";
+	}
+	
+	public User getDbUser(String name) {
+		return userDaoImpl.getUserByName(name);
 	}
 
 }
