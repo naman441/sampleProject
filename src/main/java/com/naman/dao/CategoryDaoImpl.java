@@ -94,4 +94,15 @@ public class CategoryDaoImpl implements CategoryDao{
 			return products;
 		}
 	}
+	
+	public Category getCategoryByName(String name) {
+		Session session = sessionFactory.openSession();
+		Query<Category> q = session.createQuery("from Category where name= :name");
+		q.setParameter("name", name);
+		List<Category> categories = q.getResultList();
+		session.close();
+		if(categories == null || categories.isEmpty())
+			return null;
+		else return categories.get(0);
+	}
 }

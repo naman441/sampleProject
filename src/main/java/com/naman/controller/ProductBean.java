@@ -40,6 +40,7 @@ public class ProductBean {
 	@PostConstruct
 	public void init() {
 		//products = new ArrayList<Product>();
+		product = new Product();
 	}
 
 	public List<Product> getProducts() {

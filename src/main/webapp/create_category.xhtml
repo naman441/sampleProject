@@ -18,11 +18,6 @@
 			<h:outputText value="Category Description" />
 			<h:inputText id="desc" value="#{categoryBean.category.desc}" />
 			<br></br><br></br>
-			<h:selectManyCheckbox value="#{categoryBean.products}">
-				<f:selectItems value="#{productBean.products}" var="product"
-						itemLabel="#{product.name}" itemValue="#{product.id}" />
-			</h:selectManyCheckbox>
-			
 			<br></br>
 			<h:commandButton value="Save" action="#{categoryBean.createCategory}" />
 		</h:form>

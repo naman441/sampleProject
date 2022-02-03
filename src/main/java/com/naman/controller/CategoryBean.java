@@ -29,6 +29,7 @@ public class CategoryBean {
 	@PostConstruct
 	public void init() {
 		categories = categoryService.getAllCategories();
+		category = new Category();
 	}
 	
 	public Category getCategory() {
@@ -56,7 +57,7 @@ public class CategoryBean {
 	}
 
 	public String createCategory() {
-		categoryService.createCategory(category, products);
+		categoryService.createCategory(category);
 		return "admin?faces-redirect=true";
 	}
 

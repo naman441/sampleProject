@@ -34,7 +34,7 @@ public class Category {
 	@ManyToMany(cascade = {CascadeType.DETACH, 
 		   					CascadeType.MERGE,
 		   					CascadeType.PERSIST,
-		   					CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "categories")
+		   					CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "categories")
 	private Set<Product> products = new HashSet<Product>();
 	
 	public Category() {
@@ -72,4 +72,14 @@ public class Category {
 		this.products = products;
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		if(!(object instanceof Category)) {
+			return false;
+		}
+		Category other = (Category) object;
+		if(this.id == other.id)
+			return true;
+		else return false;
+	}
 }

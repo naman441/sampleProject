@@ -46,13 +46,6 @@ public class ProductService {
 	
 	public void createProduct(Product product, List<String> categories) {
 		Set<Category> list = new HashSet<Category>();
-		if(categories != null && !categories.isEmpty()) {
-			for(String n : categories) {
-				int id = Integer.parseInt(n);
-				Category c = categoryDaoImpl.get(id);
-				list.add(c);
-			}
-		}
 		product.setCategories(list);
 		productDaoImpl.insert(product);
 	}

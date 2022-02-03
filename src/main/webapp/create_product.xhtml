@@ -21,9 +21,10 @@
 			<h:outputText value="Product Price" />
 			<h:inputText id="price" value="#{productBean.product.price}" />
 			<br></br><br></br>
-			<h:selectManyCheckbox value="#{productBean.categories}" required="true">
+			<h:selectManyCheckbox value="#{productBean.categories}" required="true" 
+				converter="#{categoryConverter}">
 				<f:selectItems value="#{categoryBean.categories}" var="category"
-						itemLabel="#{category.name}" itemValue="#{category.id}" />
+						itemLabel="#{category.name}" itemValue="#{category}" />
 			</h:selectManyCheckbox>
 			
 			<br></br>

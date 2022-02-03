@@ -21,7 +21,7 @@ public class CategoryConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		// TODO Auto-generated method stub
-		return categoryDaoImpl.get(Integer.parseInt(value));
+		return categoryDaoImpl.getCategoryByName(value);
 	}
 
 	@Override
