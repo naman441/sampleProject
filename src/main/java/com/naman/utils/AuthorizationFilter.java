@@ -38,7 +38,8 @@ public class AuthorizationFilter implements Filter{
 			res.setDateHeader("Expires", 0);
 			
 			HttpSession session = req.getSession(false);
-			if(req.getRequestURI().indexOf("/login.xhtml") >= 0 ||
+			if(req.getRequestURI().indexOf("/login.xhtml") >= 0 || 
+					req.getRequestURI().indexOf("/register.xhtml") >= 0 ||
 				(session != null && session.getAttribute("userName") != null) ||
 				req.getRequestURI().indexOf("/public/") >= 0 ||
 						req.getRequestURI().contains("javax.faces.resource"))
