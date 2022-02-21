@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.naman.Model.CartItem;
@@ -19,7 +20,7 @@ import com.naman.service.CartService;
 import com.naman.service.UserService;
 
 @Controller
-@SessionScope
+@RequestScope
 public class UserLogin {
 	
 	private String userMsg;

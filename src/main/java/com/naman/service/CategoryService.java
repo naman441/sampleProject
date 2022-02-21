@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.naman.Model.Category;
 import com.naman.Model.Product;
+import com.naman.dao.CategoryDao;
 import com.naman.dao.CategoryDaoImpl;
 import com.naman.dao.ProductDaoImpl;
 
@@ -17,40 +18,33 @@ import com.naman.dao.ProductDaoImpl;
 public class CategoryService {
 	
 	@Autowired
-	private CategoryDaoImpl categoryDaoImpl;
-	
-	@Autowired
-	private ProductDaoImpl productDaoImpl;
+	private CategoryDao categoryDao;
 	
 	public List<Category> getAllCategories() {
-		return categoryDaoImpl.getAllCategory();
+		return categoryDao.getAllCategory();
 	}
 	
-	public void addCategory(Category category) {
-		categoryDaoImpl.insert(category);
-	}
-	
-	public void createCategory(Category category) {
-		categoryDaoImpl.insert(category);
+	public int addCategory(Category category) {
+		return categoryDao.insert(category);
 	}
 	
 	public List<Category> getCategoryList(List<Category> categories){
 		if(categories != null && categories.size() > 0)
 			return categories;
-		else return categoryDaoImpl.getAllCategory();
+		else return categoryDao.getAllCategory();
 	}
 	
 	public Category getCategoryById(int id) {
-		return categoryDaoImpl.get(id);
+		return categoryDao.get(id);
 	}
 	
 	public void deleteCategory(int id) {
-		Category c =  categoryDaoImpl.get(id);
-		categoryDaoImpl.delete(c);
+		Category c =  categoryDao.get(id);
+		categoryDao.delete(c);
 	}
 	
 	public void updateCategory(Category category) {
-		categoryDaoImpl.update(category);
+		categoryDao.update(category);
 	}
 
 }

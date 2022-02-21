@@ -8,4 +8,6 @@ import com.naman.Model.UserCart;
 public interface UserCartDao extends BaseDao<UserCart>{
 
 	public void updateUserCart(UserCart cart1, UserCart cart2);
+	
+	public void deleteProductFromCart(int id);
 }

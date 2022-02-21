@@ -57,7 +57,7 @@ public class CategoryBean {
 	}
 
 	public String createCategory() {
-		categoryService.createCategory(category);
+		categoryService.addCategory(category);
 		return "admin?faces-redirect=true";
 	}
 

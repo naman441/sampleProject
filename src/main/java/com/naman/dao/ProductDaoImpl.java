@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao{
 	public Product get(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<Product> q = session.createQuery("from Product where id= :id");
+		Query<Product> q = session.createQuery("from Product where product_id= :id");
 		q.setParameter("id", id);
 		List<Product> products = q.getResultList();
 		session.close();

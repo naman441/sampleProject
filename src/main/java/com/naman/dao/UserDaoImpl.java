@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 	public User get(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<User> q = session.createQuery("from User where id= :id");
+		Query<User> q = session.createQuery("from users where users_id= :id");
 		q.setParameter("id", id);
 		List<User> user = q.getResultList();
 		session.close();
@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByName(String name) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<User> q = session.createQuery("from User where name= :name");
+		Query<User> q = session.createQuery("from users where users_name= :name");
 		q.setParameter("name", name);
 		List<User> user = q.getResultList();
 		session.close();
@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 	public String validateUser(User user) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<User> q = session.createQuery("from User where name= :name and password= :password");
+		Query<User> q = session.createQuery("from users where users_name= :name and users_password= :password");
 		q.setParameter("name", user.getName());
 		q.setParameter("password", user.getPassword());
 		List<User> users = q.getResultList();

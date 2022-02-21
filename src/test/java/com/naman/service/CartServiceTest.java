@@ -10,6 +10,8 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -18,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.internal.MockitoCore;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,9 @@ public class CartServiceTest extends TestCase {
 	
 	@BeforeAll
 	public void createTestList() {
+		
+		MockitoAnnotations.initMocks(this);
+		
 		List<CartItem> items = new ArrayList<CartItem>();
 		items.add(new CartItem(new Product(1, "Apples", "", 4), 1));
 		items.add(new CartItem(new Product(2, "oranges", "", 3), 2));
@@ -100,5 +106,12 @@ public class CartServiceTest extends TestCase {
 				.mapToDouble(p->p.getQuantity()).toArray()[0];
 		assertEquals(2.0, val);
 	}
-
+	
+	@Test
+	public void testUpdateItemQuantity() {
+		this.items = service.updateItemQuantity(items, new Product(2, "oranges", "", 3), 5);
+		double val = items.stream().filter(p->p.getProduct().getId() == 2)
+				.mapToDouble(p->p.getQuantity()).toArray()[0];
+		assertEquals(5.0, val);
+	}
 }

@@ -21,12 +21,14 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique = true, nullable = false)
+	@Column(name="product_id", unique = true, nullable = false)
 	private int id;
 	
-	@Column(name="name", unique = true, nullable = false)
+	@Column(name="product_name", unique = true, nullable = false)
 	private String name;
+	@Column(name="product_desc")
 	private String desc;
+	@Column(name="product_price")
 	private double price;
 	
 	@ManyToMany(cascade = {CascadeType.DETACH, 
@@ -35,8 +37,8 @@ public class Product {
 						   CascadeType.REFRESH}, fetch = FetchType.EAGER)
 	@JoinTable(
 				name = "Product_Category",
-				joinColumns = {@JoinColumn(name="product_id")},
-				inverseJoinColumns = {@JoinColumn(name="category_id")}
+				joinColumns = {@JoinColumn(name="product_id", referencedColumnName = "product_id")},
+				inverseJoinColumns = {@JoinColumn(name="category_id", referencedColumnName = "category_id")}
 			)
 	private Set<Category> categories = new HashSet<Category>();
 	

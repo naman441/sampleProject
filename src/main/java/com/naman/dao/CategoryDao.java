@@ -15,4 +15,6 @@ public interface CategoryDao extends BaseDao<Category>{
 	public List<Category> getAllCategory();
 	
 	public List<Product> getProductByCategory(int id); 
+	
+	public Category getCategoryByName(String name);
 }

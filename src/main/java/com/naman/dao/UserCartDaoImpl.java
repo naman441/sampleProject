@@ -56,7 +56,7 @@ public class UserCartDaoImpl implements UserCartDao{
 	public UserCart get(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<UserCart> q = session.createQuery("from UserCart where id= :id");
+		Query<UserCart> q = session.createQuery("from UserCart where users_id= :id");
 		q.setParameter("id", id);
 		List<UserCart> products = q.getResultList();
 		session.close();

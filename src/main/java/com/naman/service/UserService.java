@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.naman.Model.User;
+import com.naman.dao.UserDao;
 import com.naman.dao.UserDaoImpl;
 import com.naman.utils.AppUtils;
 import com.naman.utils.SessionUtils;
@@ -20,10 +21,10 @@ import com.naman.utils.SessionUtils;
 public class UserService {
 	
 	@Autowired
-	private UserDaoImpl userDaoImpl;
+	private UserDao userDao;
 	
 	public String validateUser(User user) {
-		User userDb = userDaoImpl.getUserByName(user.getName());
+		User userDb = userDao.getUserByName(user.getName());
 		if(userDb == null) {
 			SessionUtils.getHttpSession().setAttribute("userName", user.getName());
 			return "register";
@@ -31,7 +32,7 @@ public class UserService {
 		else if(userMatch(userDb, user)) {
 			SessionUtils.getHttpSession().setAttribute("userName", user.getName());
 			userDb.setTimeStamp(AppUtils.formatDate(LocalDateTime.now()));
-			userDaoImpl.update(userDb);
+			userDao.update(userDb);
 			return userDb.getRole();
 		}
 		else {
@@ -55,12 +56,15 @@ public class UserService {
 	}
 	
 	public String registerUser(User user) {
-		userDaoImpl.insert(user);
-		return "login";
+		int val = userDao.insert(user);
+		if(val > 0)
+			return "login";
+		else 
+			return "register";
 	}
 	
 	public User getDbUser(String name) {
-		return userDaoImpl.getUserByName(name);
+		return userDao.getUserByName(name);
 	}
 
 }

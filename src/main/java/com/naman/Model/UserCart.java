@@ -22,7 +22,7 @@ public class UserCart {
 		   				  CascadeType.MERGE,
 		   				  CascadeType.PERSIST,
 		   				  CascadeType.REFRESH}, fetch = FetchType.EAGER)
-	@JoinColumn(name ="id")
+	@JoinColumn(name ="users_id")
 	@MapsId
 	private User user;
 	

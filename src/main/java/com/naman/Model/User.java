@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
-@Entity
+@Entity(name = "users")
 public class User {
 	
 	public User() {
@@ -37,19 +37,20 @@ public class User {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name = "users_id", unique = true, nullable = false)
 	private int id;
 	
-	@Column(name="name", unique = true, nullable = false)
+	@Column(name="users_name" ,unique = true, nullable = false)
 	private String name;
 	
-	@Column(name="password", nullable = false)
+	@Column(name="users_password", nullable = false)
 	private String password;
 	
-	@Column(name="role", nullable = false)
+	@Column(name="users_role", nullable = false)
 	private String role;
 	
+	@Column(name="users_timestamp")
 	private String timeStamp;
 	
 	public int getId() {

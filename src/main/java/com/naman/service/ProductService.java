@@ -12,56 +12,61 @@ import org.springframework.stereotype.Service;
 
 import com.naman.Model.Category;
 import com.naman.Model.Product;
+import com.naman.dao.CategoryDao;
 import com.naman.dao.CategoryDaoImpl;
+import com.naman.dao.ProductDao;
 import com.naman.dao.ProductDaoImpl;
+import com.naman.dao.UserCartDao;
 import com.naman.dao.UserCartDaoImpl;
 
 @Service
 public class ProductService {
 	
 	@Autowired
-	ProductDaoImpl productDaoImpl;
+	ProductDao productDao;
 	
 	@Autowired
-	CategoryDaoImpl categoryDaoImpl;
+	CategoryDao categoryDao;
 	
 	@Autowired
-	UserCartDaoImpl userCartDaoImpl;
+	UserCartDao userCartDao;
 	
-	public void addProduct(Product product) {
-		productDaoImpl.insert(product);
+	public int addProduct(Product product) {
+		return productDao.insert(product);
 	}
 	
 	public List<Product> getAllProducts() {
-		return productDaoImpl.getAllProducts();
+		return productDao.getAllProducts();
 	}
 	
-	public List<Product> getProductList(List<Product> products){
-			return getAllProducts();
-	}
+//	public List<Product> getProductList(List<Product> products){
+//			return getAllProducts();
+//	}
 	
 	public List<Product> getProductsByCategory(int id) {
-		return categoryDaoImpl.getProductByCategory(id);
+		return categoryDao.getProductByCategory(id);
 	}
 	
-	public void createProduct(Product product, List<String> categories) {
+	public int createProduct(Product product, List<Category> categories) {
 		Set<Category> list = new HashSet<Category>();
+		for(Category c : categories)
+			list.add(c);
 		product.setCategories(list);
-		productDaoImpl.insert(product);
+		return addProduct(product);
 	}
 	
 	public Product getProductById(int id) {
-		return productDaoImpl.get(id);
+		return productDao.get(id);
 	}
 	
 	public void deleteProduct(int id) {
-		Product p =  productDaoImpl.get(id);
-		userCartDaoImpl.deleteProductFromCart(p.getId());
-		productDaoImpl.delete(p);
+		Product p =  productDao.get(id);
+		userCartDao.deleteProductFromCart(p.getId());
+		productDao.delete(p);
 	}
 	
 	public void updateProduct(Product product) {
-		productDaoImpl.update(product);
+		productDao.update(product);
 	}
 
 }

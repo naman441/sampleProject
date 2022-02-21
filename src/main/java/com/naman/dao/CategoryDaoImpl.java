@@ -59,7 +59,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	public Category get(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Query<Category> q = session.createQuery("from Category where id= :id");
+		Query<Category> q = session.createQuery("from Category where category_id= :id");
 		q.setParameter("id", id);
 		List<Category> categories = q.getResultList();
 		session.close();
@@ -83,7 +83,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		// TODO Auto-generated method stub
 		List<Product> products = new ArrayList<Product>();
 		Session session =  sessionFactory.openSession();
-		Query<Category> q = session.createQuery("from Category where id = :id");
+		Query<Category> q = session.createQuery("from Category where category_id = :id");
 		q.setParameter("id", id);
 		List<Category> categories = q.getResultList();
 		if(categories == null || categories.isEmpty())
@@ -97,7 +97,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	
 	public Category getCategoryByName(String name) {
 		Session session = sessionFactory.openSession();
-		Query<Category> q = session.createQuery("from Category where name= :name");
+		Query<Category> q = session.createQuery("from Category where category_name= :name");
 		q.setParameter("name", name);
 		List<Category> categories = q.getResultList();
 		session.close();

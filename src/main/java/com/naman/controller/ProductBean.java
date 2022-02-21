@@ -32,7 +32,7 @@ public class ProductBean {
 	private List<Product> products;
 	private Category selectedCategory;
 	private Product product;
-	private List<String> categories;
+	private List<Category> categories;
 	
 	@Autowired
 	private ProductService productService;
@@ -67,11 +67,11 @@ public class ProductBean {
 		this.product = product;
 	}
 
-	public List<String> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<String> categories) {
+	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
 
